@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 
 # load_dotenv()
 
-SECRET_KEY_API = os.getenv('SECRET_KEY')
+SECRET_KEY_API = os.getenv('SECRET_KEY_API')
 @login_required
 def api(request):
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
