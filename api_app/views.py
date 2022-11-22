@@ -2,7 +2,7 @@ from django.shortcuts import render
 from . import forms
 from requests import Session
 import json
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 from django.http import HttpResponseRedirect
 from . import models
@@ -10,9 +10,9 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
-load_dotenv()
+# load_dotenv()
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY_API = os.getenv('SECRET_KEY')
 @login_required
 def api(request):
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
@@ -20,7 +20,7 @@ def api(request):
     
     headers = {
         'Accepts': 'application/json',
-        'X-CMC_PRO_API_KEY': SECRET_KEY
+        'X-CMC_PRO_API_KEY': SECRET_KEY_API
     }
     session = Session()
     session.headers.update(headers)
