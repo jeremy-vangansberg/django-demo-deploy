@@ -8,11 +8,12 @@ from django.http import HttpResponseRedirect
 from . import models
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-
+@login_required
 def api(request):
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
     
@@ -35,5 +36,4 @@ def api(request):
             form.save()
             info = json.loads(response.text)
             return render(request, 'api_app/formulaire.html', context = {'form' : form, "info": info})
-
     return render(request, 'api_app/formulaire.html', context = {'form' : form})

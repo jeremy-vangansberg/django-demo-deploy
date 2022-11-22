@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load widget_tweaks static %}
+{% load add_var %}
 
 {% block content %}
 
@@ -11,19 +12,22 @@
     {% csrf_token %}
         <div class="mb-3">
           <label for="{{ form.slug.id_for_label }}" class="form-label">Crypto</label>
-          {{ form.slug|add_class:"form-control" }}
+          {{ form.slug|add_class:"form-control"|attr:"placeholder:bitcoin, ethereum, etc." }}
         </div>
         <div class="mb-3">
           <label for="{{ form.convert.id_for_label }}" class="form-label">Devise</label>
-          {{ form.convert|add_class:"form-control" }}
+          {{ form.convert|add_class:"form-control"|attr:"placeholder:eur, dollar, etc." }}
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <p class="api_info">{{info}}</p>
+{% if request.method == 'POST' %}
+<p class="api_info">{{ info.data|var:"price" }}</p>
+{% endif %}
+    
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="{% static 'js/script.js'%}"></script>
+{% comment %} <script src="{% static 'js/script.js'%}"></script> {% endcomment %}
 
 {% endblock content %}

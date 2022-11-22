@@ -16,11 +16,18 @@
 
         {% url 'func_list' as func_list %}
         {% url 'func_detail' as func_detail %}
+        {% url 'api' as api %}
 
         {% if request.path == func_list %}
           <li class="nav-item"><a href="{{func_list}}" class="nav-link active">Fonctionnalites</a></li>
         {% else %}
           <li class="nav-item"><a href="{{func_list}}" class="nav-link">Fonctionnalites</a></li>
+        {% endif %}
+
+        {% if request.path == api %}
+          <li class="nav-item"><a href="{{api}}" class="nav-link active">API</a></li>
+        {% else %}
+          <li class="nav-item"><a href="{{api}}" class="nav-link">API</a></li>
         {% endif %}
         
       </ul>
