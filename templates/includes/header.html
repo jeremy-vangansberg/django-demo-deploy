@@ -1,5 +1,5 @@
 <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
         <span class="fs-4">CoinAgricole</span>
@@ -17,6 +17,9 @@
         {% url 'func_list' as func_list %}
         {% url 'func_detail' as func_detail %}
         {% url 'api' as api %}
+        {% url 'login' as login %}
+        {% url 'signup' as signup %}
+        {% url 'logout' as logout %}
 
         {% if request.path == func_list %}
           <li class="nav-item"><a href="{{func_list}}" class="nav-link active">Fonctionnalites</a></li>
@@ -29,7 +32,24 @@
         {% else %}
           <li class="nav-item"><a href="{{api}}" class="nav-link">API</a></li>
         {% endif %}
-        
       </ul>
+        
+      {% if request.user.is_authenticated %}
+      
+      <span class='navbar-text ms-5'>Logged as : <b>{{request.user}}</b> </span>
+      
+      <div class="text-end">
+        <a href="{{logout}}" class="btn btn-primary ms-2">Logout</a>
+      </div>
+        
+
+
+      
+      {% else %}
+      <a href="{{login}}" class="btn btn-outline-primary ms-5 me-2">Login</a>
+      <a href="{{signup}}" class="btn btn-outline-primary me-2 active">Sign-up</a>
+      {% endif %}
+
+    
     </header>
 </div>

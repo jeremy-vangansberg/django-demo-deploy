@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load widget_tweaks static %}
-{% load add_var %}
+{% load api_functions %}
 
 {% block content %}
 
@@ -16,14 +16,17 @@
         </div>
         <div class="mb-3">
           <label for="{{ form.convert.id_for_label }}" class="form-label">Devise</label>
-          {{ form.convert|add_class:"form-control"|attr:"placeholder:eur, dollar, etc." }}
+          {{ form.convert|add_class:"form-control"|attr:"placeholder:EUR, USD, etc." }}
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 {% if request.method == 'POST' %}
-<p class="api_info">{{ info.data|var:"price" }}</p>
+<p class="api_info">Prix : {{info.data|var:"price"|floatformat:2}} {{info.data|cur}}</p>
+<p class="api_info">Volume en 24h : {{info.data|var:"volume_24h"|floatformat:2}}</p>
+<p class="api_info">% de changement depuis hier : {{info.data|var:"percent_change_24h"|floatformat:2 }}</p>
+<p class="api_info">% du marché: {{info.data|var:"market_cap_dominance"|floatformat:2 }}</p>
 {% endif %}
     
 </div>
