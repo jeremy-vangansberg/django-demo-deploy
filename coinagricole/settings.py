@@ -143,8 +143,8 @@ USE_TZ = True
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "static/"
 
-if not IS_HEROKU:
-    STATICFILES_DIRS = [
+
+STATICFILES_DIRS = [
         BASE_DIR / "static",
     ]
 
